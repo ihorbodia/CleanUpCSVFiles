@@ -44,15 +44,23 @@ namespace CleanUpCSVFiles
 
         public void RunProcess()
         {
-            if (SettingsFile == null || string.IsNullOrEmpty(Properties.Settings.Default.SettingsFile))
+            if (SettingsFile == null)
             {
-                OnErrorOcured("You cannot start without choosen settings file!");
-                return;
+                if (string.IsNullOrEmpty(Properties.Settings.Default.SettingsFile))
+                {
+                    OnErrorOcured("You cannot start without choosen settings file!");
+                    return;
+                }
+                InitSettingsFilePath(Properties.Settings.Default.SettingsFile);
             }
-            if (HoldingFiles == null || string.IsNullOrEmpty(Properties.Settings.Default.HoldingFiles))
+            if (HoldingFiles == null)
             {
-                OnErrorOcured("You cannot start without choosen holdings file!");
-                return;
+                if (string.IsNullOrEmpty(Properties.Settings.Default.HoldingFiles))
+                {
+                    OnErrorOcured("You cannot start without choosen holdings file!");
+                    return;
+                }
+                InitHoldingFilesPath(Properties.Settings.Default.HoldingFiles);
             }
             Task.Factory.StartNew(new Action(StartProcessing));
         }
@@ -85,10 +93,8 @@ namespace CleanUpCSVFiles
                         FileInfo file = Files.FirstOrDefault(x => x.Name.Contains(fileName) && !string.IsNullOrEmpty(fileName));
                         if (file != null)
                         {
-                            var headData = File.ReadAllLines(file.FullName).Take(3);
-                            var remainData = File.ReadAllLines(file.FullName).Skip(cellValue + 1);
-                            File.WriteAllLines(file.FullName, headData);
-                            File.AppendAllLines(file.FullName, remainData);
+                            var remainData = File.ReadAllLines(file.FullName).Skip(cellValue - 1);
+                            File.WriteAllLines(file.FullName, remainData);
                         }
                         OnMessageChanged($"Processed: {i + 1}/{ws.Dimension.Rows + 1}");
                     }
