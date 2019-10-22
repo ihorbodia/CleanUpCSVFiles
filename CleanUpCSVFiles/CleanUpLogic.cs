@@ -90,7 +90,7 @@ namespace CleanUpCSVFiles
                         var cellValue = ws.Cells[$"B{i + 2}"].GetValue<int>();
                         var fileName = ws.Cells[$"A{i + 2}"].Text;
 
-                        FileInfo file = Files.FirstOrDefault(x => x.Name.Contains(fileName) && !string.IsNullOrEmpty(fileName));
+                        FileInfo file = Files.FirstOrDefault(x => x.Name.Contains(fileName+"_") && !string.IsNullOrEmpty(fileName));
                         if (file != null)
                         {
                             var remainData = File.ReadAllLines(file.FullName).Skip(cellValue - 1);
