@@ -86,7 +86,7 @@ namespace CleanUpCSVFiles
                         if (file != null)
                         {
                             var headData = File.ReadAllLines(file.FullName).Take(3);
-                            var remainData = File.ReadAllLines(file.FullName).Skip(3).Skip(cellValue + 1);
+                            var remainData = File.ReadAllLines(file.FullName).Skip(cellValue + 1);
                             File.WriteAllLines(file.FullName, headData);
                             File.AppendAllLines(file.FullName, remainData);
                         }

@@ -17,7 +17,7 @@ namespace CleanUpCSVFiles
             ChoosenSettingsFileLabel.AutoEllipsis = true;
 
             Version version = System.Reflection.Assembly.GetExecutingAssembly().GetName().Version;
-            string displayableVersion = $"Clean up CSV files {version.Major}.{version.Minor}.{version.Revision}";
+            string displayableVersion = $"Clean up CSV files {version.Major}.{version.Minor}";
             Text = displayableVersion;
             logic = new CleanUpLogic();
             ChoosenHoldingsLabel.Text = Properties.Settings.Default.HoldingFiles;
