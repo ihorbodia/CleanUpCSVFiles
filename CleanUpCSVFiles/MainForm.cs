@@ -36,7 +36,7 @@ namespace CleanUpCSVFiles
 
         private void ChooseHoldingsBtn_Click(object sender, EventArgs e)
         {
-            logic.InitHoldingFilesPath(Properties.Settings.Default.HoldingFiles);
+            logic.InitHoldingFilesPath(null);
             ChoosenHoldingsLabel.Text = Properties.Settings.Default.HoldingFiles;
         }
 
@@ -90,7 +90,7 @@ namespace CleanUpCSVFiles
 
         private void ChooseSettingsBtn_Click(object sender, EventArgs e)
         {
-            logic.InitSettingsFilePath(Properties.Settings.Default.SettingsFile);
+            logic.InitSettingsFilePath(null);
             ChoosenSettingsFileLabel.Text = Properties.Settings.Default.SettingsFile;
         }
     }
